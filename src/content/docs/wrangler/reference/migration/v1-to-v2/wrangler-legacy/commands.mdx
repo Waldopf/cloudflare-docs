@@ -10,7 +10,7 @@ head:
 
 import { Render, Type, MetaInfo, WranglerConfig } from "~/components";
 
-<Render file="wrangler-v1-deprecation" />
+<Render file="wrangler-v1-deprecation" product="workers" />
 
 Complete list of all commands available for [`wrangler`](https://github.com/cloudflare/wrangler-legacy), the Workers CLI.
 
@@ -539,8 +539,6 @@ Most `kv` commands require you to specify a namespace. A namespace can be specif
    ```
 
 Most `kv` subcommands also allow you to specify an environment with the optional `--env` flag. This allows you to publish Workers running the same code but with different namespaces. For example, you could use separate staging and production namespaces for KV data in your Wrangler file:
-
-
 
 <WranglerConfig>
 

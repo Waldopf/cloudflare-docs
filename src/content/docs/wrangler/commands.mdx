@@ -1,13 +1,22 @@
 ---
 pcx_content_type: reference
-title: Commands
+title: CLI Commands
+sidebar:
+  order: 2
 head:
   - tag: title
-    content: Commands - Wrangler
+    content: CLI Commands - Wrangler
 description: Create, develop, and deploy your Cloudflare Workers with Wrangler commands.
 ---
 
-import { TabItem, Tabs, Render, Type, MetaInfo, WranglerConfig } from "~/components";
+import {
+	TabItem,
+	Tabs,
+	Render,
+	Type,
+	MetaInfo,
+	WranglerConfig,
+} from "~/components";
 
 Wrangler offers a number of commands to manage your Cloudflare Workers.
 
@@ -1841,6 +1850,7 @@ wrangler cert upload certificate-authority --ca-cert <PATH> [OPTIONS]
 ```
 
 - `--ca-cert` <Type text="string" /> <MetaInfo text="required" />
+
   - A path to the Certificate Authority (CA) chain certificate to upload.
 
 - `--name` <Type text="string" /> <MetaInfo text="optional" />

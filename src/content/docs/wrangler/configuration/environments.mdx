@@ -4,6 +4,8 @@ title: Environments
 head: []
 description: Deploy the same Worker application with different configuration for
   each environment.
+sidebar:
+  order: 3
 ---
 
 import { WranglerConfig } from "~/components";
@@ -61,8 +63,6 @@ After you have configured your environment, run `npx wrangler deploy` in your Wo
 
 Review the following example Wrangler file:
 
-
-
 <WranglerConfig>
 
 ```toml
@@ -94,8 +94,6 @@ You may assign environment-specific [secrets](/workers/configuration/secrets/) b
 ### Staging and production environments
 
 The following Wrangler file adds two environments, `[env.staging]` and `[env.production]`, to the Wrangler file. If you are deploying to a [Custom Domain](/workers/configuration/routing/custom-domains/) or [route](/workers/configuration/routing/routes/), you must provide a [`route` or `routes` key](/workers/wrangler/configuration/) for each environment.
-
-
 
 <WranglerConfig>
 
@@ -167,8 +165,6 @@ if (ENVIRONMENT === "staging") {
 ### Staging environment with \*.workers.dev
 
 To deploy your code to your `*.workers.dev` subdomain, include `workers_dev = true` in the desired environment. Your Wrangler file may look like this:
-
-
 
 <WranglerConfig>
 

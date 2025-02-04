@@ -16,8 +16,9 @@ const sidebars = new Map<string, Group>();
 
 export async function getSidebar(context: AstroGlobal<Props>) {
 	const pathname = context.url.pathname;
+	console.log(pathname);
 	const segments = pathname.split("/").slice(1, -1);
-
+	console.log(segments);
 	const product = segments.at(0);
 
 	if (!product) {

@@ -1,14 +1,24 @@
 ---
 pcx_content_type: configuration
-title: API
+title: Programmatic execution
 sidebar:
-  order: 2
+  order: 4
 head: []
 description: A set of programmatic APIs that can be integrated with local
   Cloudflare Workers-related workflows.
 ---
 
-import { Render, TabItem, Tabs, Type, MetaInfo, WranglerConfig } from "~/components";
+import {
+	Render,
+	TabItem,
+	Tabs,
+	Type,
+	MetaInfo,
+	WranglerConfig,
+} from "~/components";
+
+Programmatic execution can be useful to automate testing of Workers projects in continuous testing environments. In these scenarios, you need a way
+to access the underlying server, emulations or bindings of Cloudflare Workers which are usually present when developing with the Wrangler CLI.
 
 Wrangler offers APIs to programmatically interact with your Cloudflare Workers.
 
@@ -339,8 +349,6 @@ The bindings supported by `getPlatformProxy` are:
   - To use a Durable Object binding with `getPlatformProxy`, always [specify a `script_name`](/workers/wrangler/configuration/#durable-objects) and have the target Worker run in a separate terminal via [`wrangler dev`](/workers/wrangler/commands/#dev).
 
     For example, you might have the following file read by `getPlatformProxy`.
-
-
 
     <WranglerConfig>
 

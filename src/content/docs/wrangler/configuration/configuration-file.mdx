@@ -1,6 +1,8 @@
 ---
 pcx_content_type: configuration
-title: Configuration
+title: Configuration file
+sidebar:
+  order: 1
 head:
   - tag: title
     content: Configuration - Wrangler
@@ -412,7 +414,7 @@ watch_dir = "build_watch_dir"
 
 You can impose limits on your Worker's behavior at runtime. Limits are only supported for the [Standard Usage Model](/workers/platform/pricing/#example-pricing-standard-usage-model). Limits are only enforced when deployed to Cloudflare's network, not in local development. The CPU limit can be set to a maximum of 30,000 milliseconds (30 seconds).
 
-<Render file="isolate-cpu-flexibility" /> <br />
+<Render file="isolate-cpu-flexibility" product="workers" /> <br />
 
 - `cpu_ms` <Type text="number" /> <MetaInfo text="optional" />
 
@@ -631,8 +633,7 @@ deleted_classes = ["DeprecatedClass"] # Array of deleted class names
 
 Example:
 
-<Render file="envvar-example" />
-
+<Render file="envvar-example" product="workers" />
 ### Hyperdrive
 
 [Hyperdrive](/hyperdrive/) bindings allow you to interact with and query any Postgres database from within a Worker.
@@ -1104,7 +1105,7 @@ local_protocol = "http"
 
 [Secrets](/workers/configuration/secrets/) are a type of binding that allow you to [attach encrypted text values](/workers/wrangler/commands/#secret) to your Worker.
 
-<Render file="secrets-in-dev" />
+<Render file="secrets-in-dev" product="workers" />
 
 ## Module Aliasing
 
@@ -1198,7 +1199,7 @@ upload_source_maps = true
 
 ## Workers Sites
 
-<Render file="workers_sites" />
+<Render file="workers_sites" product="workers" />
 
 [Workers Sites](/workers/configuration/sites/) allows you to host static websites, or dynamic websites using frameworks like Vue or React, on Workers.
 
