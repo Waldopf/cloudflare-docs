@@ -20,5 +20,38 @@ If you wish to access the Durable Object `name`, you can pass the string by usin
 This example demonstrates how to perform this action.
 
 ```js
-// TBC
+import { DurableObject, RpcTarget } from 'cloudflare:workers';
+
+export class MyDurableObject extends DurableObject<Env> {
+	doName: string | undefined = undefined;
+	constructor(ctx: DurableObjectState, env: Env) {
+		super(ctx, env);
+	}
+
+	async init(doName: string | undefined) {
+		this.doName = doName;
+		// Return an RpcTarget that implements the methods
+
+		console.log('init', doName);
+		return new (class extends RpcTarget {
+			async sayHello(name: string) {
+				return `Hello, ${name}!`;
+			}
+		})();
+	}
+}
+
+export default {
+	async fetch(request, env, ctx): Promise<Response> {
+		let id: DurableObjectId = env.MY_DURABLE_OBJECT.idFromName(new URL(request.url).pathname);
+		let stub = env.MY_DURABLE_OBJECT.get(id);
+
+		// Note: no await on init() - it returns an RpcTarget immediately
+		const rpcTarget = stub.init(id.name);
+		// This is where the actual network call happens
+		const greeting = await rpcTarget.sayHello('world');
+
+		return new Response(greeting, { status: 200 });
+	},
+} satisfies ExportedHandler<Env>;
 ```
