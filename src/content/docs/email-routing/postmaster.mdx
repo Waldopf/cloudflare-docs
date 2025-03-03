@@ -147,7 +147,7 @@ In most cases, Email Routing forwards the upstream SMTP errors back to the sende
 
 ### Realtime Block Lists
 
-Email Routing uses an internal Domain Name System Blacklists (DNSBL) service to check if the sender's IP is present in one or more Realtime Block Lists (RBL) lists. When the system detects an abusive IP, it blocks the email and returns an SMTP error:
+Email Routing uses an internal Domain Name System Blocklists (DNSBL) service to check if the sender's IP is present in one or more Realtime Block Lists (RBL) lists. When the system detects an abusive IP, it blocks the email and returns an SMTP error:
 
 ```txt
 554 <YOUR_IP_ADDRESS> found on one or more RBLs (abusixip). Refer to https://developers.cloudflare.com/email-routing/postmaster/#spam-and-abusive-traffic/
