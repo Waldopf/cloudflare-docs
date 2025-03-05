@@ -37,20 +37,13 @@ Some SaaS applications provide the Redirect URL after you [configure the SSO pro
 
 6. Select **Add application**.
 
-7. In **Scopes**, select the attributes that you want Access to send in the ID token.
-
-   | Scope     | Description                                          |
-   | --------- | ---------------------------------------------------- |
-   | `openid`  | Include a unique identifier for the user (required). |
-   | `email`   | Include the user's email address.                    |
-   | `profile` | Include all custom OIDC claims from the IdP.         |
-   | `groups`  | Include the user's IdP group membership.             |
+7. In **Scopes**, select the attributes that you want Access to send in the ID token. For more information about configuring OIDC scopes and claims, refer to [OIDC claims]().
 
 8. In **Redirect URLs**, enter the callback URL obtained from the SaaS application.
 
-9. (Optional) Enable [Proof of Key Exchange (PKCE)](https://www.oauth.com/oauth2-servers/pkce/) if the protocol is supported by your IdP. PKCE will be performed on all login attempts.
+10. (Optional) Enable [Proof of Key Exchange (PKCE)](https://www.oauth.com/oauth2-servers/pkce/) if the protocol is supported by your IdP. PKCE will be performed on all login attempts.
 
-10. Copy the following values to input into your SaaS application. Different SaaS applications may require different sets of input values.
+12. Copy the following values to input into your SaaS application. Different SaaS applications may require different sets of input values.
     | Field                  | Description                                                                                                                                                                                                                                                      |
     | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
     | Client secret          | Credential used to authorize Access as an SSO provider                                                                                                                                                                                                           |
@@ -62,17 +55,17 @@ Some SaaS applications provide the Redirect URL after you [configure the SSO pro
     | Key endpoint           | Returns the current public keys used to [verify the Access JWT](/cloudflare-one/identity/authorization-cookie/validating-json/) <br/> `https://<your-team-name>.cloudflareaccess.com/cdn-cgi/access/sso/oidc/<client-id>/jwks`                                   |
     | User info endpoint     | Returns all user claims in JSON format <br/> `https://<your-team-name>.cloudflareaccess.com/cdn-cgi/access/sso/oidc/<client-id>/userinfo`                                                                                                                        |
 
-11. Add [Access policies](/cloudflare-one/policies/access/) to control who can connect to your application. All Access applications are deny by default -- a user must match an Allow policy before they are granted access.
+13. Add [Access policies](/cloudflare-one/policies/access/) to control who can connect to your application. All Access applications are deny by default -- a user must match an Allow policy before they are granted access.
 
-12. <Render file="access/access-choose-idps" product="cloudflare-one" />
+14. <Render file="access/access-choose-idps" product="cloudflare-one" />
 
-13. Select **Next**.
+15. Select **Next**.
 
-14. (Optional) Configure [App Launcher settings](/cloudflare-one/applications/app-launcher/) for the application.
+16. (Optional) Configure [App Launcher settings](/cloudflare-one/applications/app-launcher/) for the application.
 
-15. <Render file="access/access-block-page" product="cloudflare-one" />
+17. <Render file="access/access-block-page" product="cloudflare-one" />
 
-16. Select **Save application**.
+18. Select **Save application**.
 
 ## 3. Configure SSO in your SaaS application
 
@@ -81,3 +74,31 @@ Next, configure your SaaS application to require users to log in through Cloudfl
 ## 4. Test the integration
 
 Open an incognito browser window and go to the SaaS application's login URL. You will be redirected to the Cloudflare Access login screen and prompted to sign in with your identity provider.
+
+## OIDC claims
+
+OIDC claims refer to the user identity characteristics that Cloudflare Access shares with your OIDC SaaS application upon successful authentication. An OIDC scope defines a set of OIDC claims. By default, Cloudflare Access passes all [standard claims](https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims) that are included in the `openid`, `email`, `profile`, and `groups` scopes (if available).
+
+   | Scope     | Description                                          |
+   | --------- | ---------------------------------------------------- |
+   | `openid`  | Includes a unique identifier for the user (required). |
+   | `email`   | Includes the user's email address.                    |
+   | `profile` | Includes the user's name and all custom OIDC claims from the IdP.         |
+   | `groups`  | Include the user's IdP group membership.             |
+
+If needed, you can modify the **Scopes** field in your Access application. For example, you can remove `groups` if your SaaS application does not need to receive user group information.
+
+### Filter groups
+
+`(^TEAM-Engineering-.$)|(^TEAM-Product-.$)`
+
+### Add claims
+
+To add additional claims to your SaaS application, configure the following fields for each **OIDC Claim**:
+
+	- **Name**: OIDC claim name
+	- **Scope**: Select the OIDC scope where this claim should be included. In most cases, we recommend selecting `profile` since it already includes other custom claims from the IdP.
+	- **IdP claim**: The identity provider value that should map to this OIDC claim. You can select any [SAML attribute](/cloudflare-one/identity/idp-integration/generic-saml/#saml-headers-and-attributes) or [OIDC claim](/cloudflare-one/identity/idp-integration/generic-oidc/#oidc-claims) that was configured in a Zero Trust IdP integration.
+	- **Required**: If a claim is marked as required but is not provided by an IdP, Cloudflare will fail the authentication request and show an error page.
+	- **Add per IdP claim**: (Optional) If you turned on multiple identity providers for the SaaS application, you can choose different attribute mappings for each IdP. These values will override the parent **IdP claim**.
+
