@@ -127,9 +127,14 @@ export default {
 };
 ```
 
-Workers do not allow I/O outside of a request context. This means that certain bindings will
-not work from the top-level context. For instance, making a call to the [KV binding](/kv/concepts/kv-bindings/)
-will error, but making it from within a request will work.
+Workers do not allow I/O from outside a request context. This means that even
+though `env` is accessible from the top-level scope, you will not be able to access
+every binding's methods.
+
+For instance, environment variables and secrets are accessible, and you are able to
+call `env.NAMESPACE.get` to get a [Durable Object stub](/durable-objects/api/stub/) in the
+top-level context. However, calling methods on the Durable Object stub, making [calls to a KV store](/kv/api/),
+and [calling to other Workers](/workers/runtime-apis/bindings/service-bindings) will not work.
 
 ```js
 import { env } from "cloudflare:workers";
@@ -182,7 +187,7 @@ for dependency injection and testing.
 The `withEnv` function provides a mechanism for overriding values of `env`.
 
 Imagine a user has defined the [environment variable](/workers/configuration/environment-variables/)
-"NAME" to be "Alice" in their Wrangler configuration file and deployed a worker. By default, logging
+"NAME" to be "Alice" in their Wrangler configuration file and deployed a Worker. By default, logging
 `env.NAME` would print "Alice". Using the `withEnv` function, you can override the value of
 "NAME".
 
