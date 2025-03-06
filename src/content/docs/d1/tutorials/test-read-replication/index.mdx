@@ -80,6 +80,69 @@ Populate your database with the table from the [D1 get started](/d1/get-started/
 Write a Worker file which queries the table and outputs both the results with the query latency.
 
 ```js
-// TBC
+export default {
+	async fetch(request, env) {
+	  const { pathname } = new URL(request.url);
+	  const companyName1 = `Bs Beverages`;
+	  const stmt = env.DB.prepare(`SELECT * FROM Customers WHERE CompanyName = ?`);
+	  const session = env.DB.withSession("first-unconstrained");
+
+	  if (pathname === `/run`) {
+		const tsStart1 = Date.now();
+		const { results, meta } = await stmt.bind(companyName1).run();
+		const d1Duration1 = Date.now() - tsStart1;
+		return Response.json({ results, meta, d1Duration1 });
+
+	  } else if (pathname === `/withsession`) {
+		const tsStart2 = Date.now();
+		const { results, meta } = await session.prepare(`SELECT * FROM Customers WHERE CompanyName = ?`).bind(companyName1).run();
+		const d1Duration2 = Date.now() - tsStart2;
+		return Response.json({ results, meta, d1Duration2 });
+	  }
+	  return new Response(
+		`Welcome to the D1 read replication demo!
+
+  Add one of the following slugs below to see the effects of using D1 read replication.
+
+  \n/run - Queries the table without using read replication
+
+  \n/withsession - Queries the table using read replication (using "first-unconstrained")
+
+	\nUse the two options to compare the difference in query latency.`
+	  );
+	}
+  };
 ```
 
+## 6. Deploy Worker
+
+Deploy your worker.
+
+```sh
+npx wrangler deploy
+```
+
+## 7. Compare query latency
+
+Once deployed, you can compare the query latency when using read replication.
+
+- Use the `/run` URL to send a read query without read replication.
+- Use the `/withsession` URL to send a read query with read replication.
+
+For both queries, the Worker script returns the `meta` object, which contains `served-by-primary` boolean field. This field indicates whether your request was served by the primary database instance.
+
+The `d1Duration` variable shows the query latency.
+
+## Summary
+
+By completing this tutorial, you have:
+
+1. Created a D1 database using a location hint.
+2. Created a Worker script which uses D1 Sessions to use read replication.
+3. Deployed the Worker to test the difference in query latency when using read replication.
+
+## Related resources
+
+- [D1 read replication](/d1/concepts/read-replication)
+- [D1 Sessions Workers Binding API](/d1/worker-api/d1-database#withsession)
+- [D1 read replication demo application](/d1/demos/)
