@@ -55,7 +55,7 @@ export default class WeatherWorker extends WorkerEntrypoint<Env> {
 **How it works:**
 * **TypeScript methods as MCP tools:** Each public method in your class is exposed as an MCP tool that agents can call. In this example, getWeather is the tool that fetches data from an external weather API.
 * **Automatic tool documentation:** JSDoc comments define the tool description, parameters, and return values, so Claude knows exactly how to call your method and interpret the response.
-* **Build-in MCP compatibility:** The `ProxyToSelf` class handles all MCP protocol requirements
+* **Build-in MCP compatibility:** The `ProxyToSelf` class translates incoming requests into relevant JS RPC methods
 * **Enforced type safety:** Parameter and return types are automatically derived from your TypeScript definitions
 
 ## Get Started
