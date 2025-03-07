@@ -5,15 +5,13 @@ sidebar:
   order: 100
   group:
     hideIndex: true
-description: Learn how to create, deploy, and configure an MCP server on Cloudflare Workers to enable AI assistants to interact with your services directly.
+description: Build and deploy an MCP server on Cloudflare Workers
 ---
 
 import { MetaInfo, Render, Type, TypeScriptExample, WranglerConfig } from "~/components";
 import { Aside } from '@astrojs/starlight/components';
 
-In this guide, you will learn how to build and deploy a Model Context Protocol (MCP) server on Cloudflare Workers.
-
-[Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) is an open standard that allows AI agents and assistants (like [Claude Desktop](https://claude.ai/download), [Cursor](https://www.cursor.com/), or [Anthropic's Claude](https://www.anthropic.com/claude)) to interact with services directly. If you want users to access your service through an AI agent, you can spin up an MCP server for your application.
+[Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) is an open standard that allows AI agents and assistants (like [Claude Desktop](https://claude.ai/download) or [Cursor](https://www.cursor.com/)) to interact with services directly. If you want users to access your service through an AI assistant, you can spin up an MCP server for your application.
 
 ### Why use Cloudflare Workers for MCP?
 
@@ -21,7 +19,7 @@ With Cloudflare Workers and the [workers-mcp](https://github.com/cloudflare/work
 
 #### Example: Exposing a Weather API as an MCP server
 
-Here's a Cloudflare Worker that fetches weather data from an external API and exposes it as an MCP tool that Claude can call directly:
+Here’s a Cloudflare Worker that fetches weather data from an external API and exposes it as an MCP tool that Claude can call directly:
 
 ```ts
 import { WorkerEntrypoint } from 'cloudflare:workers';
