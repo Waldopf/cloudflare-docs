@@ -64,6 +64,6 @@ You can serve static assets in your Vue application by [placing them in the `./p
 
 <Render file="workers-assets-routing-summary" />
 
-## Bindings
+## Use bindings with Vue
 
-Your new project also contains a Worker (at `./server/index.ts`), which you can use as a backend API for your Vue application. From this Worker, you can use bindings to access resources on the Cloudflare Developer Platform. Learn how to [configure Workers bindings](/workers/runtime-apis/bindings/).
+Your new project also contains a Worker at `./server/index.ts`, which you can use as a backend API for your Vue application. While your Vue application cannot directly access Workers bindings, it can interact with them through this Worker. You can make [`fetch()` requests](/workers/runtime-apis/fetch/) from your Vue application to the Worker, which can then handle the request and use bindings. Learn how to [configure Workers bindings](/workers/runtime-apis/bindings/).
