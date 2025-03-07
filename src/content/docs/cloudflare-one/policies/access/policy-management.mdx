@@ -50,18 +50,19 @@ To delete a reusable Access policy:
 
 You can test your policies against an existing user identity to see if they would be granted access. For the policy tester to work, the user must have logged into the [App Launcher](/cloudflare-one/applications/app-launcher/) or any other Access application at some point in time.
 
-To check if a user has access to an application:
+To check if users have access to an application:
 
 1. In [Zero Trust](https://one.dash.cloudflare.com/), go to **Access** > **Applications**.
 2. Locate the application you want to test and select **Configure**.
-3. Go to the **Policies** tab and select **Test policies**.
-4. Enter the user's email address and select **Test policies**.
+3. Go to **Policies** > **Policy tester**.
+4. To test all active users in your organization, select **Test policies**.
 
-The policy tester reports the following information:
+		The policy tester reports the percentage of users who are allowed or denied access to the application based on all configured policies. You can expand the test results to view a list of allowed or blocked users.
 
-- Whether the user is allowed or denied access to the application based on all configured policies.
-- The user's identity from their most recent Access login attempt.
-- Whether the user matches individual Allow, Block, or Bypass policies.
+5. To perform a detailed test on a single user, select **Testing a single user** and enter their email address. The test results will show:
+	- Whether the user is allowed or denied access to the application based on all configured policies.
+	- The user's identity from their most recent Access login attempt.
+	- Whether the user matches individual Allow, Block, or Bypass policies.
 
 ## Legacy policies
 
