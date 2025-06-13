@@ -255,7 +255,7 @@ textarea,
 .flexbox .control-label,
 .flexbox .controls,
 .ws-input input,
-.ws-input .ws-input-seperator,
+.ws-input .ws-input-separator,
 .tabs a,
 .mod-row,
 .mod-cell,
@@ -5590,7 +5590,7 @@ form .alert {
 .input-buttons,
 .input-buttons *,
 .details-open-indicator,
-.ws-input-seperator,
+.ws-input-separator,
 progress span.progress-value {
     margin: 0;
     padding: 0;
@@ -5821,7 +5821,7 @@ output {
     word-spacing: normal
 }
 
-.ws-input .ws-input-seperator {
+.ws-input .ws-input-separator {
     vertical-align: middle;
     width: 2%;
     overflow: hidden
@@ -5832,7 +5832,7 @@ output {
 }
 
 .ws-input input,
-.ws-input .ws-input-seperator {
+.ws-input .ws-input-separator {
     text-align: center;
     display: inline-block;
     vertical-align: middle;
@@ -5842,7 +5842,7 @@ output {
 }
 
 .polyfill-important .ws-input input,
-.polyfill-important .ws-input .ws-input-seperator {
+.polyfill-important .ws-input .ws-input-separator {
     display: inline-block !important
 }
 
