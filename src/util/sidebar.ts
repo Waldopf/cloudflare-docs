@@ -130,7 +130,7 @@ function setSidebarCurrentEntry(
 			const href = entry.href;
 
 			// Compare with and without trailing slash
-			if (href === pathname || href.slice(0, -1) === href) {
+			if (href === pathname || href.slice(0, -1) === pathname) {
 				entry.isCurrent = true;
 				return true;
 			}
